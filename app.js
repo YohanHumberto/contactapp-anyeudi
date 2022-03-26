@@ -32,9 +32,13 @@ app.use((req, res, next) => {
 });
 
 conect.sync().then(result => {
-    app.listen(PORT);
-    console.log(`Server runnig in port http://localhost:${PORT}`)
-
+    app.listen(PORT, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`Server runnig in port http://localhost:${PORT}`)
+        }
+    })
 }).catch(err => {
     console.log(err);
 });
