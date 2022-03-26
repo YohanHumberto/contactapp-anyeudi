@@ -4,7 +4,7 @@ const expressHbs = require("express-handlebars");
 const { conect } = require("./DB/conection");
 
 const app = express();
-const PORT = 3001 || process.env.PORT;
+const PORT = process.env.PORT || 3001;
 const router = require("./routes/routes");
 
 
