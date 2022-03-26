@@ -4,7 +4,8 @@
   "description": "this is a app contants",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "author": "Anyeudi Beras",
   "license": "ISC",
