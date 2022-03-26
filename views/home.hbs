@@ -1,0 +1,82 @@
+<main>
+    <div class="row">
+        <div class="col-4 ps-3">
+            {{#if editMode}}
+            <div class="card mt-4">
+                <div class="card-header">
+                    Contact Form
+                </div>
+                <form action="/editContact" method="post" class="card-body ">
+                    <input type="hidden" value="{{editContact.Id}}" name="Id">
+                    <label for="email">First Name</label>
+                    <input class="form-control mb-3" type="text" value="{{editContact.FirstName}}" name="FirstName"
+                        id="FirstName" placeholder="FirstName">
+                    <label for="email">Last Name</label>
+                    <input class="form-control mb-3" type="text" value="{{editContact.LastName}}" name="LastName"
+                        placeholder="LastName">
+                    <label for="email">Email</label>
+                    <input class="form-control mb-3" type="text" value="{{editContact.Email}}" name="Email"
+                        placeholder="Email">
+                    <label for="email">Movil</label>
+                    <input class="form-control mb-3" type="text" value="{{editContact.Mobile}}" name="Mobile"
+                        placeholder="Movil">
+                    <button type="reset" class="btn btn-warning p-2 px-5">Limpiar</button>
+                    <button class="btn btn-primary p-2 px-5">Save</button>
+                </form>
+            </div>
+            {{else}}
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    Contact Form
+                </div>
+                <form action="/addContact" method="post" class="card-body ">
+                    <label for="email">First Name</label>
+                    <input class="form-control mb-3" type="text" name="FirstName" id="FirstName"
+                        placeholder="FirstName">
+                    <label for="email">Last Name</label>
+                    <input class="form-control mb-3" type="text" name="LastName" placeholder="LastName">
+                    <label for="email">Email</label>
+                    <input class="form-control mb-3" type="text" name="Email" placeholder="Email">
+                    <label for="email">Movil</label>
+                    <input class="form-control mb-3" type="text" name="Mobile" placeholder="Movil">
+                    <button class="btn btn-warning p-2 px-5">Cancelan</button>
+                    <button class="btn btn-primary p-2 px-5">Save</button>
+                </form>
+            </div>
+            {{/if}}
+        </div>
+        <div class="col-8 p-4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Andress</th>
+                        <th>Mobile#</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each contacts as |contact|}}
+                    <tr>
+                        <th>{{contact.Id}}</th>
+                        <th>{{contact.FirstName}}</th>
+                        <th>{{contact.LastName}}</th>
+                        <th>{{contact.Email}}</th>
+                        <th>{{contact.Mobile}}</th>
+                        <th>
+                            <a href="/GetHomeEdit/{{contact.Id}}" class="btn btn-warning">Update</a>
+                        </th>
+                        <th>
+                            <a class="btn btn-danger" href="/deleteContact/{{contact.Id}}">Delete</a>
+                        </th>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

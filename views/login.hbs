@@ -1,0 +1,17 @@
+<main>
+    <div class="container">
+        <form action="" method="post" class="w-50 m-auto mt-5 shadow p-5">
+            {{#if alertDanger}}
+            <div class="alert alert-danger">
+                {{alertDangerMessage}}
+            </div>
+            {{/if}}
+            <h2 class="mb-2">Sing In</h2>
+            <label for="email">Email address</label>
+            <input class="form-control mb-3" type="text" name="email" id="email" placeholder="Email address">
+            <label for="email">password</label>
+            <input class="form-control mb-3" type="password" name="password" placeholder="use email">
+            <button class="btn btn-primary p-3 px-5">Submit</button>
+        </form>
+    </div>
+</main>
