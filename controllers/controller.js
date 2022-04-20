@@ -1,4 +1,17 @@
+const nodemailer = require('nodemailer');
 const Contat = require("../models/Contats");
+
+// DEBES RELLENAR ESTAS CONSTANTES ["USEREMAIL" y "USERPASS"] CON UN CORREO Y CONTRASENA, 
+// DICHO CORREO NO DEBE TENER ACTIVADO LA  SEGURIDAD EN DOS PASOS 
+// Y DEBE TERNER ACTIVO EL ACCESO  A SITIOS NOMUY SEGUROS
+
+const USEREMAIL = "";
+const USERPASS = "";
+
+// FIN  "Eso era  todo jajajaj"
+
+let IsError = false;
+let MsgError = "";
 
 module.exports.GetLogin = (req, res, next) => {
     res.render("login.hbs");
@@ -15,15 +28,19 @@ module.exports.PostLogin = (req, res, next) => {
     }
 }
 
-module.exports.GetHome = async (req, res, next) => {
+module.exports.GetHome = async(req, res, next) => {
     const contacts = (await Contat.findAll()).map(item => item.dataValues);
     console.log(contacts);
-    res.render("home.hbs", { contacts });
+    res.render("home.hbs", {
+        contacts,
+        IsError,
+        MsgError
+    });
 }
 
 
 //COntancst
-module.exports.GetHomeEdit = async (req, res, next) => {
+module.exports.GetHomeEdit = async(req, res, next) => {
     const { id } = req.params;
 
     const contacts = (await Contat.findAll()).map(item => item.dataValues);
@@ -45,8 +62,7 @@ module.exports.addContact = (req, res, next) => {
             console.log(contac);
             if (contac) {
                 res.redirect("/home");
-            } else {
-            }
+            } else {}
         } else {
             res.send("server error");
         }
@@ -56,15 +72,15 @@ module.exports.addContact = (req, res, next) => {
     }
 
 }
-module.exports.editContact = async (req, res, next) => {
+module.exports.editContact = async(req, res, next) => {
 
     if (req.body) {
-        const contact = await Contat.update({ ...req.body }, { where: { Id: req.body.Id } });
+        const contact = await Contat.update({...req.body }, { where: { Id: req.body.Id } });
         res.redirect("/home");
     }
 
 }
-module.exports.deleteContact = async (req, res, next) => {
+module.exports.deleteContact = async(req, res, next) => {
     const { id } = req.params;
 
     // const contact = await Contat.findByPk(id);
@@ -81,5 +97,44 @@ module.exports.deleteContact = async (req, res, next) => {
 
 }
 
+//SECCION DEL ENVIO DE CORREO
+module.exports.GetPageSendEmail = async(req, res, next) => {
+    const { email } = req.params;
+    res.render("SendEmail.hbs", { email });
+}
+module.exports.SendEmail = async(req, res, next) => {
+    const { Para, Asundo, cuerpo } = req.body;
 
+    // email sender function
+    // Definimos el transporter
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: USEREMAIL,
+            pass: USERPASSUSERPASS
+        }
+    });
 
+    // Definimos el email
+    var mailOptions = {
+        from: USEREMAIL,
+        to: Para,
+        subject: Asundo,
+        text: cuerpo
+    };
+
+    // Enviamos el email
+    transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+            console.log(error);
+            IsError = true;
+            MsgError = "Ha ocorrudo un error al enviar el email verifique el correro o destino y vuelva a intentarlo";
+
+            res.redirect("/home");
+        } else {
+            console.log("Email sent");
+            res.redirect("/home");
+        }
+    });
+
+}

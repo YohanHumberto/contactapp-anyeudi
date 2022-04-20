@@ -1,5 +1,10 @@
 <main>
     <div class="row">
+        {{#if IsError}}
+        <div class="alert alert-danger"> 
+            {{MsgError}}
+        </div>
+        {{/if}}
         <div class="col-4 ps-3">
             {{#if editMode}}
             <div class="card mt-4">
@@ -15,7 +20,7 @@
                     <input class="form-control mb-3" type="text" value="{{editContact.LastName}}" name="LastName"
                         placeholder="LastName">
                     <label for="email">Email</label>
-                    <input class="form-control mb-3" type="text" value="{{editContact.Email}}" name="Email"
+                    <input class="form-control mb-3" type="email" value="{{editContact.Email}}" name="Email"
                         placeholder="Email">
                     <label for="email">Movil</label>
                     <input class="form-control mb-3" type="text" value="{{editContact.Mobile}}" name="Mobile"
@@ -37,7 +42,7 @@
                     <label for="email">Last Name</label>
                     <input class="form-control mb-3" type="text" name="LastName" placeholder="LastName">
                     <label for="email">Email</label>
-                    <input class="form-control mb-3" type="text" name="Email" placeholder="Email">
+                    <input class="form-control mb-3" type="email" name="Email" placeholder="Email">
                     <label for="email">Movil</label>
                     <input class="form-control mb-3" type="text" name="Mobile" placeholder="Movil">
                     <button class="btn btn-warning p-2 px-5">Cancelan</button>
@@ -57,6 +62,7 @@
                         <th>Mobile#</th>
                         <th>Update</th>
                         <th>Delete</th>
+                        <th>SendEmail</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +78,11 @@
                         </th>
                         <th>
                             <a class="btn btn-danger" href="/deleteContact/{{contact.Id}}">Delete</a>
+                        </th>
+                        <th>
+                            <a href="/getpagesendemail/{{contact.Email}}">
+                                <button class="btn btn-success">SendEmail</button>
+                            </a>
                         </th>
                     </tr>
                     {{/each}}

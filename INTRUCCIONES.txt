@@ -1,0 +1,8 @@
+PASO 1:
+    Abre una terminal y muevete al directorio raiz y lluego ejecuta el siguiente comando "npm i"
+PASO 2  : 
+    dirigete a controllers/controllers.js y lee el primer comentario
+PASO 3:
+    En la misma terminal ejecuta "npm start"
+PASSO 5: 
+    Luego solo accede a http://localhost:3001

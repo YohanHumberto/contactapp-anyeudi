@@ -13,8 +13,10 @@ router.post("/addContact", controller.addContact);
 router.post("/editContact", controller.editContact);
 router.get("/deleteContact/:id", controller.deleteContact);
 
+//Send Email
+router.get("/getpagesendemail/:email", controller.GetPageSendEmail);
+router.post("/sendemail", controller.SendEmail);
 
 
 
 module.exports = router;
-

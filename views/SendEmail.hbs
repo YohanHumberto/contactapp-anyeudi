@@ -1,0 +1,15 @@
+<main>
+    <form method="post" action="/sendemail" class="w-50 m-auto border shadow p-5 pt-4 mt-4">
+        <h1 class="text-center">Send Email</h1>
+        <h6 class="text-center">Write  your email</h6>
+        <label for="">Para</label>
+        <input value=" {{email}}" class="form-control mb-2 mt-1"  disabled type="text">
+        <input value=" {{email}}" name="Para" class="form-control mb-2 mt-1" type="hidden">
+        <label for="">Asunto</label>
+        <input name="Asundo" class="form-control mb-2 mt-1" type="text" placeholder="Asunto">
+        <label for="">Redactar Correo</label>
+        <textarea name="cuerpo" class="form-control mb-2 mt-1" name="" id="" cols="0" rows="5" placeholder="Cuerpo"></textarea>
+        <button type="reset" class="btn btn-warning">Clear</button>
+        <button type="submit" class="btn btn-primary">Send Mail</button>
+    </form>
+</main>
